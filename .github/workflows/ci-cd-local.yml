@@ -1,0 +1,40 @@
+name: CI/CD Demo (Local Runner)
+on:
+  push:
+    branches: [ "main" ]
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: self-hosted  # Chạy trên máy local của bạn
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: docker/setup-buildx-action@v2
+      
+      - name: Build and load to local Docker
+        run: |
+          eval $(minikube docker-env)
+          docker build -t demo-ci-cd:${{ github.sha }} .
+          docker tag demo-ci-cd:${{ github.sha }} demo-ci-cd:latest
+
+  deploy:
+    runs-on: self-hosted  # Chạy trên máy local của bạn
+    needs: build
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Deploy to Minikube via Helm
+        run: |
+          # Minikube sử dụng local Docker images
+          helm upgrade --install demo-frontend demo-frontend-chart \
+            --namespace demo --create-namespace \
+            --set image.repository=demo-ci-cd \
+            --set image.tag=${{ github.sha }} \
+            --set image.pullPolicy=Never \
+            --wait --timeout 5m
+          
+      - name: Get Service URL
+        run: |
+          echo "Application deployed!"
+          minikube service demo-frontend -n demo --url

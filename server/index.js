@@ -4,6 +4,11 @@ const app = express();
 
 const PORT = process.env.PORT || 8080;
 
+// Health check endpoint for Kubernetes
+app.get('/health', (req, res) => {
+  res.status(200).json({ status: 'ok', timestamp: new Date().toISOString() });
+});
+
 app.use(express.static(path.join(__dirname, '..', 'frontend', 'dist', 'frontend')));
 
 app.get('*', (req, res) => {

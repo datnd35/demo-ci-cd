@@ -34,13 +34,15 @@ jobs:
       - uses: azure/setup-kubectl@v3
 
       - name: Prepare kubeconfig
-        run: echo "${{ secrets.KUBECONFIG_DATA }}" | base64 --decode > kubeconfig
-        env:
-          KUBECONFIG: kubeconfig
+        run: |
+          echo "${{ secrets.KUBECONFIG_DATA }}" | base64 --decode > kubeconfig
+          export KUBECONFIG=$(pwd)/kubeconfig
 
       - name: Deploy via Helm
         run: |
+          export KUBECONFIG=$(pwd)/kubeconfig
           helm upgrade --install demo-frontend demo-frontend-chart \
             --namespace demo --create-namespace \
             --set image.repository=ghcr.io/${{ github.repository_owner }}/demo-ci-cd \
-            --set image.tag=${{ github.sha }}
+            --set image.tag=${{ github.sha }} \
+            --wait --timeout 5m

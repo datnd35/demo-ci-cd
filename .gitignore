@@ -1,0 +1,20 @@
+# Runner files
+actions-runner/
+actions-runner-*.tar.gz
+bin/
+externals/
+config.sh
+env.sh
+run.sh
+run-helper.*.template
+safe_sleep.sh
+_diag/
+_work/
+
+# Node modules
+node_modules/
+**/node_modules/
+
+# Build outputs
+dist/
+build/
