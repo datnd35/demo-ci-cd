@@ -27,24 +27,26 @@ git remote set-url origin https://github.com/YOUR_USERNAME/demo-ci-cd.git
 ### Bước 2: Setup Self-Hosted Runner
 
 1. **Vào GitHub Repository:**
+
    - Settings → Actions → Runners → New self-hosted runner
 
 2. **Chọn macOS** và copy commands
 
 3. **Chạy commands trên máy Mac:**
+
    ```bash
    # Tạo thư mục riêng cho runner
    mkdir ~/actions-runner && cd ~/actions-runner
-   
+
    # Download runner (lấy link từ GitHub)
    curl -o actions-runner-osx-arm64-2.311.0.tar.gz -L https://github.com/actions/runner/releases/download/v2.311.0/actions-runner-osx-arm64-2.311.0.tar.gz
-   
+
    # Extract
    tar xzf ./actions-runner-osx-arm64-2.311.0.tar.gz
-   
+
    # Configure (token từ GitHub)
    ./config.sh --url https://github.com/YOUR_USERNAME/YOUR_REPO --token YOUR_TOKEN
-   
+
    # Start runner
    ./run.sh
    ```
@@ -148,6 +150,7 @@ cat ~/.kube/config | base64 | pbcopy
 ### Bước 2: Thêm GitHub Secrets
 
 1. **Vào Repository Settings:**
+
    - Settings → Secrets and variables → Actions
 
 2. **New repository secret:**
@@ -183,13 +186,13 @@ kubectl get svc demo-frontend -n demo
 
 ## 📊 So sánh 2 options
 
-| Feature | Self-Hosted + Minikube | Cloud Cluster |
-|---------|----------------------|---------------|
-| Chi phí | 🟢 FREE | 🟡 $10-50/tháng |
-| Setup | 🟡 Trung bình | 🔴 Khó |
-| Production | 🔴 Không | 🟢 Có |
-| Máy phải bật | 🔴 Có | 🟢 Không |
-| Build speed | 🟢 Nhanh | 🟡 Trung bình |
+| Feature      | Self-Hosted + Minikube | Cloud Cluster   |
+| ------------ | ---------------------- | --------------- |
+| Chi phí      | 🟢 FREE                | 🟡 $10-50/tháng |
+| Setup        | 🟡 Trung bình          | 🔴 Khó          |
+| Production   | 🔴 Không               | 🟢 Có           |
+| Máy phải bật | 🔴 Có                  | 🟢 Không        |
+| Build speed  | 🟢 Nhanh               | 🟡 Trung bình   |
 
 ---
 

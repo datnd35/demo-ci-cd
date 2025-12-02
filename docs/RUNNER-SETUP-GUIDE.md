@@ -23,20 +23,23 @@ Mỗi repository có TOKEN riêng, bạn PHẢI lấy commands từ GitHub!
 
 ### Bước 3: Copy Commands từ GitHub
 
-GitHub sẽ hiển thị một trang với các commands. 
+GitHub sẽ hiển thị một trang với các commands.
 
 **⚠️ QUY TẮC COPY:**
+
 - ✅ **CHỈ copy phần sau dấu `$`**
 - ❌ **KHÔNG copy dấu `$`**
 - ❌ **KHÔNG copy dòng có dấu `#`**
 
 **Ví dụ trên GitHub hiển thị:**
+
 ```
 # Create a folder
 $ mkdir actions-runner && cd actions-runner
 ```
 
 **Bạn CHỈ copy:**
+
 ```
 mkdir actions-runner && cd actions-runner
 ```
@@ -44,6 +47,7 @@ mkdir actions-runner && cd actions-runner
 ### Bước 4: Thực hiện từng lệnh
 
 #### Lệnh 1: Tạo thư mục
+
 ```bash
 # Copy lệnh từ GitHub có dạng:
 mkdir actions-runner && cd actions-runner
@@ -52,6 +56,7 @@ mkdir actions-runner && cd actions-runner
 ```
 
 #### Lệnh 2: Download runner
+
 ```bash
 # Copy lệnh từ GitHub có dạng:
 curl -o actions-runner-osx-arm64-2.319.1.tar.gz -L https://github.com/actions/runner/releases/download/v2.319.1/actions-runner-osx-arm64-2.319.1.tar.gz
@@ -61,6 +66,7 @@ curl -o actions-runner-osx-arm64-2.319.1.tar.gz -L https://github.com/actions/ru
 ```
 
 #### Lệnh 3: Extract
+
 ```bash
 # Copy lệnh từ GitHub có dạng:
 tar xzf ./actions-runner-osx-arm64-2.319.1.tar.gz
@@ -69,6 +75,7 @@ tar xzf ./actions-runner-osx-arm64-2.319.1.tar.gz
 ```
 
 #### Lệnh 4: Configure (⚠️ LƯU Ý: CÓ TOKEN)
+
 ```bash
 # Copy lệnh từ GitHub có dạng:
 ./config.sh --url https://github.com/datnd35/demo-ci-cd --token AXXXXXXXXXXXXXXXXXXXXX
@@ -83,6 +90,7 @@ tar xzf ./actions-runner-osx-arm64-2.319.1.tar.gz
 ```
 
 #### Lệnh 5: Start runner
+
 ```bash
 # Copy lệnh từ GitHub:
 ./run.sh
@@ -134,11 +142,13 @@ open https://github.com/datnd35/demo-ci-cd/actions
 ### Lỗi: Token đã hết hạn
 
 **Lỗi:**
+
 ```
 Failed to connect. Try again or ctrl-c to quit
 ```
 
 **Giải pháp:**
+
 1. Quay lại browser
 2. Refresh trang: https://github.com/datnd35/demo-ci-cd/settings/actions/runners/new
 3. Copy lệnh `./config.sh` MỚI (có token mới)
@@ -147,6 +157,7 @@ Failed to connect. Try again or ctrl-c to quit
 ### Lỗi: Runner không connect
 
 **Kiểm tra:**
+
 ```bash
 # Check runner status
 ps aux | grep run.sh
@@ -162,6 +173,7 @@ cd ~/actions-runner
 ### Lỗi: Workflow không chạy
 
 **Kiểm tra:**
+
 1. Runner có đang chạy? (terminal hiển thị "Listening for Jobs")
 2. Workflow file có đúng `runs-on: self-hosted`?
 3. Check Actions tab: https://github.com/datnd35/demo-ci-cd/actions
@@ -175,6 +187,7 @@ cd ~/actions-runner
 https://github.com/datnd35/demo-ci-cd/settings/actions/runners
 
 Sẽ thấy:
+
 - ✅ Green dot = Runner online
 - ⚪ Gray dot = Runner offline
 
@@ -183,11 +196,13 @@ Sẽ thấy:
 ## 🛑 Stop/Remove Runner
 
 ### Tạm dừng:
+
 ```bash
 # Ctrl+C trong terminal đang chạy ./run.sh
 ```
 
 ### Xóa runner:
+
 ```bash
 cd ~/actions-runner
 ./config.sh remove --token YOUR_REMOVAL_TOKEN

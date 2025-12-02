@@ -1,0 +1,11 @@
+﻿{
+  "agentId": 2,
+  "agentName": "Datitk16",
+  "poolId": 1,
+  "poolName": "Default",
+  "serverUrl": "https://pipelinesghubeus22.actions.githubusercontent.com/8P5jCC02km5YkhDw7mH4I9RYMkg4r2WRjiJ8sIz1hFgatjUzqU/",
+  "gitHubUrl": "https://github.com/datnd35/demo-ci-cd",
+  "workFolder": "_work",
+  "useV2Flow": true,
+  "serverUrlV2": "https://broker.actions.githubusercontent.com/"
+}
